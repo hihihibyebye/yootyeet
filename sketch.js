@@ -9,11 +9,12 @@ function preload()
 
 function setup() {
   createCanvas(800, 700);
+  database=firebase.database(); 
   dog = createSprite(400,350,50,50);
-  dog = loadImage(dogimg);
+  dog = loadImage("img",dogimg);
 
-  food = firebase.database().ref('food');
-  food.on("value",readPosition,showError);
+  food = database.ref('Food');
+  food.on("value",showError);
   
 
   
@@ -26,11 +27,25 @@ background("green")
   //add styles here
   if(keyDown(UP_ARROW))
   {
-    writeposition(-1);
+    writefood(-1);
 
   }
 
 }
 
+function writefood()
+  {
+    database.ref('food').set
+    {
+        'count'
+    }
 
+  }
+
+
+
+function showError()
+{
+    console.log("error");
+}
 
